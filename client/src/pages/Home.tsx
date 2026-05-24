@@ -872,28 +872,12 @@ function NossaHistoriaSection() {
       <div className="container">
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "4rem",
-            alignItems: "center",
+            maxWidth: "700px",
+            margin: "0 auto",
           }}
         >
-          {/* Logo */}
-          <div className="reveal" style={{ textAlign: "center" }}>
-            <img
-              src="/manus-storage/661494002_18072624329259722_6017400420472477859_n_3c02a36e.jpg"
-              alt="Logo Boncrepe"
-              style={{
-                maxWidth: "280px",
-                height: "auto",
-                margin: "0 auto",
-                filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.3))",
-              }}
-            />
-          </div>
-
           {/* Text */}
-          <div className="reveal" style={{ transitionDelay: "150ms" }}>
+          <div className="reveal">
             <h2
               style={{
                 fontFamily: "'Playfair Display', serif",
