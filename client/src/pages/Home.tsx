@@ -202,6 +202,7 @@ function Header() {
           {[
             { href: "#inicio", label: "Início" },
             { href: "#cardapio", label: "Cardápio" },
+            { href: "#historia", label: "Nossa História" },
             { href: "#contato", label: "Contato" },
           ].map(({ href, label }) => (
             <a
@@ -856,6 +857,114 @@ function CardapioSection() {
   );
 }
 
+// ─── Nossa História Section ─────────────────────────────────────────────────
+function NossaHistoriaSection() {
+  return (
+    <section
+      id="historia"
+      style={{
+        padding: "6rem 0",
+        background: "#2E1414",
+        borderTop: "1px solid rgba(212, 175, 55, 0.1)",
+        borderBottom: "1px solid rgba(212, 175, 55, 0.1)",
+      }}
+    >
+      <div className="container">
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "4rem",
+            alignItems: "center",
+          }}
+        >
+          {/* Logo */}
+          <div className="reveal" style={{ textAlign: "center" }}>
+            <img
+              src="/manus-storage/661494002_18072624329259722_6017400420472477859_n_3c02a36e.jpg"
+              alt="Logo Boncrepe"
+              style={{
+                maxWidth: "280px",
+                height: "auto",
+                margin: "0 auto",
+                filter: "drop-shadow(0 10px 30px rgba(0,0,0,0.3))",
+              }}
+            />
+          </div>
+
+          {/* Text */}
+          <div className="reveal" style={{ transitionDelay: "150ms" }}>
+            <h2
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
+                fontWeight: 700,
+                color: "#F5ECD7",
+                marginBottom: "1rem",
+                lineHeight: 1.2,
+              }}
+            >
+              Nossa História
+            </h2>
+
+            <p
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: "1.3rem",
+                fontStyle: "italic",
+                color: "#D4AF37",
+                marginBottom: "1.5rem",
+                lineHeight: 1.6,
+              }}
+            >
+              Criados com paixão,<br />servidos com amor.
+            </p>
+
+            <div
+              style={{
+                width: "48px",
+                height: "2px",
+                background: "linear-gradient(90deg, #D4AF37, transparent)",
+                marginBottom: "1.5rem",
+              }}
+            />
+
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 300,
+                fontSize: "1rem",
+                color: "rgba(245, 236, 215, 0.75)",
+                lineHeight: 1.9,
+                marginBottom: "1.25rem",
+              }}
+            >
+              Nascida do amor pela culinária francesa, a Bon Crêpe traz para o
+              Brasil a autenticidade das crêperies parisienses com o calor e a
+              criatividade tipicamente brasileira. Cada crepe é uma obra de arte
+              comestível.
+            </p>
+
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 300,
+                fontSize: "1rem",
+                color: "rgba(245, 236, 215, 0.75)",
+                lineHeight: 1.9,
+              }}
+            >
+              Usamos apenas ingredientes frescos e selecionados, preparados na
+              hora com muito carinho. Porque acreditamos que comida boa é aquela
+              feita com alma.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Contato Section ─────────────────────────────────────────────────────────
 function ContatoSection() {
   return (
@@ -1173,6 +1282,7 @@ export default function Home() {
       <HeroSection />
       <DiferenciaisSection />
       <CardapioSection />
+      <NossaHistoriaSection />
       <ContatoSection />
       <Footer />
     </div>
