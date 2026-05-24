@@ -497,19 +497,24 @@ function HeroSection() {
 function DiferenciaisSection() {
   const items = [
     {
-      icon: "🥚",
-      title: "Massa Caseira",
-      desc: "Feita na hora, com ingredientes selecionados.",
+      icon: "❤️",
+      title: "Feito com Amor",
+      desc: "Cada crepe preparado na hora, com ingredientes frescos e o cuidado de quem ama o que faz.",
     },
     {
-      icon: "⚡",
-      title: "Pronto pra Viagem",
-      desc: "Embalagem especial para não perder a textura.",
+      icon: "✨",
+      title: "Receitas Francesas",
+      desc: "A autenticidade das creperies parisienses com o sabor e o calor do Brasil.",
     },
     {
-      icon: "☕",
-      title: "Combos Café",
-      desc: "Acompanhado de café especial.",
+      icon: "👥",
+      title: "Atendimento Especial",
+      desc: "Um espaço acolhedor pensado para você se sentir em casa desde o primeiro momento.",
+    },
+    {
+      icon: "⏱️",
+      title: "Rápido & Fresquinho",
+      desc: "Massa na chapa toda hora — crocante, levinha e quentinha, do jeito que tem que ser.",
     },
   ];
 
