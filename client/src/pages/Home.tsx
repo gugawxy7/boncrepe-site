@@ -502,11 +502,6 @@ function DiferenciaisSection() {
       desc: "Feita na hora, com ingredientes selecionados.",
     },
     {
-      icon: "🍫",
-      title: "Chocolate Belga",
-      desc: "Utilizamos apenas chocolates premium.",
-    },
-    {
       icon: "⚡",
       title: "Pronto pra Viagem",
       desc: "Embalagem especial para não perder a textura.",
