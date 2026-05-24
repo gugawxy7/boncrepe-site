@@ -3,9 +3,11 @@
  * Design: Velvet Bistro — fundo escuro profundo, detalhes dourados/rosa/cobre
  * Tipografia: Playfair Display (títulos) + Montserrat (corpo)
  * Paleta: #1E0B0B bg | #D4AF37 gold | #BE5A83 rose | #B87333 copper | #F5ECD7 cream
+ * Cardápio real com categorias: Salgados, Doces, Combos, Salgados e Cafeteria, Bebidas
  */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // ─── Imagens geradas (asset URLs do CDN) ───────────────────────────────────
 const HERO_IMG =
@@ -22,9 +24,6 @@ const AMBIENTE_IMG =
 // ─── WhatsApp link ──────────────────────────────────────────────────────────
 const WA_BASE = "https://wa.me/5511922053411";
 const WA_GERAL = `${WA_BASE}?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es`;
-const WA_NUTELLA = `${WA_BASE}?text=Ol%C3%A1!%20Quero%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20Crepe%20Nutella%20Especial`;
-const WA_SALGADA = `${WA_BASE}?text=Ol%C3%A1!%20Quero%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20Club%20Salgada`;
-const WA_CHOCO = `${WA_BASE}?text=Ol%C3%A1!%20Quero%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20Chocolate%20Quente`;
 
 // ─── WhatsApp SVG Icon ──────────────────────────────────────────────────────
 function WhatsAppIcon({ size = 18 }: { size?: number }) {
@@ -38,6 +37,69 @@ function WhatsAppIcon({ size = 18 }: { size?: number }) {
     >
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
     </svg>
+  );
+}
+
+// ─── MenuItem Component ──────────────────────────────────────────────────────
+function MenuItem({
+  name,
+  price,
+  description,
+}: {
+  name: string;
+  price: string;
+  description?: string;
+}) {
+  return (
+    <div
+      style={{
+        padding: "1rem",
+        borderBottom: "1px solid rgba(212, 175, 55, 0.1)",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        gap: "1rem",
+      }}
+      className="reveal"
+    >
+      <div style={{ flex: 1 }}>
+        <p
+          style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontSize: "0.95rem",
+            fontWeight: 600,
+            color: "#F5ECD7",
+            marginBottom: description ? "0.25rem" : 0,
+          }}
+        >
+          {name}
+        </p>
+        {description && (
+          <p
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: "0.75rem",
+              color: "rgba(245, 236, 215, 0.5)",
+              fontStyle: "italic",
+            }}
+          >
+            {description}
+          </p>
+        )}
+      </div>
+      <span
+        style={{
+          fontFamily: "'Cormorant Garamond', serif",
+          fontStyle: "italic",
+          fontSize: "1.1rem",
+          fontWeight: 600,
+          color: "#D4AF37",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {price}
+      </span>
+    </div>
   );
 }
 
@@ -535,186 +597,67 @@ function DiferenciaisSection() {
   );
 }
 
-// ─── Menu Card ───────────────────────────────────────────────────────────────
-function MenuCard({
-  image,
-  title,
-  description,
-  price,
-  badge,
-  waLink,
-  delay = 0,
-}: {
-  image: string;
-  title: string;
-  description: string;
-  price: string;
-  badge?: string;
-  waLink: string;
-  delay?: number;
-}) {
-  return (
-    <div
-      className="menu-card reveal"
-      style={{
-        transitionDelay: `${delay}ms`,
-        background: "#2E1414",
-        borderRadius: "1.25rem",
-        overflow: "hidden",
-        border: "1px solid rgba(255,255,255,0.06)",
-      }}
-    >
-      {/* Image */}
-      <div
-        style={{
-          height: "260px",
-          overflow: "hidden",
-          position: "relative",
-        }}
-      >
-        <img
-          src={image}
-          alt={title}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            transition: "transform 500ms cubic-bezier(0.23,1,0.32,1)",
-          }}
-          onMouseEnter={(e) =>
-            ((e.target as HTMLElement).style.transform = "scale(1.08)")
-          }
-          onMouseLeave={(e) =>
-            ((e.target as HTMLElement).style.transform = "scale(1)")
-          }
-        />
-        {badge && (
-          <span
-            style={{
-              position: "absolute",
-              top: "1rem",
-              left: "1rem",
-              background: "#BE5A83",
-              color: "#fff",
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: "0.65rem",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              padding: "0.3rem 0.75rem",
-              borderRadius: "9999px",
-            }}
-          >
-            {badge}
-          </span>
-        )}
-      </div>
-
-      {/* Content */}
-      <div style={{ padding: "1.5rem" }}>
-        <h3
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "1.4rem",
-            fontWeight: 700,
-            color: "#F5ECD7",
-            marginBottom: "0.5rem",
-          }}
-        >
-          {title}
-        </h3>
-        <p
-          style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontSize: "0.85rem",
-            color: "rgba(245, 236, 215, 0.55)",
-            marginBottom: "1.25rem",
-            lineHeight: 1.6,
-          }}
-        >
-          {description}
-        </p>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontStyle: "italic",
-              fontSize: "1.6rem",
-              fontWeight: 600,
-              color: "#D4AF37",
-            }}
-          >
-            {price}
-          </span>
-          <a
-            href={waLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-press"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "0.4rem",
-              background: "#BE5A83",
-              color: "#fff",
-              padding: "0.5rem 1rem",
-              borderRadius: "0.5rem",
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: "0.75rem",
-              fontWeight: 600,
-              textDecoration: "none",
-              transition: "background 200ms ease",
-            }}
-            onMouseEnter={(e) =>
-              ((e.currentTarget as HTMLElement).style.background = "#a8476f")
-            }
-            onMouseLeave={(e) =>
-              ((e.currentTarget as HTMLElement).style.background = "#BE5A83")
-            }
-          >
-            <WhatsAppIcon size={14} />
-            Pedir Info
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // ─── Cardápio Section ────────────────────────────────────────────────────────
 function CardapioSection() {
-  const menuItems = [
-    {
-      image: NUTELLA_IMG,
-      title: "Nutella Especial",
-      description: "Nutella, morangos frescos e nozes crocantes.",
-      price: "R$ 28,90",
-      badge: "Mais Pedido",
-      waLink: WA_NUTELLA,
+  const [activeTab, setActiveTab] = useState("salgados");
+
+  const cardapioData = {
+    salgados: {
+      title: "Crepes Salgados",
+      subtitle: "Os Clássicos de Paris",
+      items: [
+        { name: "Suíço (Tradicional)", price: "R$ 10,00" },
+        { name: "Francês", price: "R$ 25,00" },
+      ],
     },
-    {
-      image: SALGADA_IMG,
-      title: "Club Salgada",
-      description: "Frango grelhado, bacon crocante e cream cheese.",
-      price: "R$ 32,90",
-      badge: "Salgado",
-      waLink: WA_SALGADA,
+    doces: {
+      title: "Crepes Doces",
+      subtitle: "Delícias Indulgentes",
+      items: [
+        { name: "Suíço (Tradicional)", price: "R$ 12,00" },
+        { name: "Francês", price: "R$ 30,00" },
+      ],
     },
-    {
-      image: CHOCO_IMG,
-      title: "Chocolate Quente",
-      description: "Chocolate belga derretido com creme chantilly.",
-      price: "R$ 14,90",
-      badge: "Bebida",
-      waLink: WA_CHOCO,
+    combos: {
+      title: "Combos",
+      subtitle: "Ofertas Especiais",
+      items: [
+        {
+          name: "Combo Café + Salgado",
+          price: "R$ 15,00",
+          description: "Qualquer salgado + Café Expresso ou Café com Leite",
+        },
+        {
+          name: "Combo Expresso + Pão de Queijo",
+          price: "R$ 10,00",
+        },
+      ],
     },
-  ];
+    cafeteria: {
+      title: "Salgados e Cafeteria",
+      subtitle: "Acompanhamentos",
+      items: [
+        { name: "Pão de Queijo Gourmet", price: "R$ 6,00" },
+        { name: "Croissants / Pizza Francesa", price: "R$ 10,00" },
+        { name: "Café Expresso", price: "R$ 5,00" },
+        { name: "Café com Leite", price: "R$ 7,50" },
+      ],
+    },
+    bebidas: {
+      title: "Bebidas",
+      subtitle: "Refrescos e Bebidas Especiais",
+      items: [
+        { name: "Água Mineral", price: "R$ 3,50" },
+        { name: "Refrigerantes (Lata)", price: "R$ 6,00" },
+        { name: "H2OH Lata", price: "R$ 7,00" },
+        { name: "Mansão Maromba", price: "R$ 20,00" },
+        { name: "Del Valle Lata", price: "R$ 7,00" },
+        { name: "Cerveja Amstel", price: "R$ 5,00" },
+        { name: "Cerveja Heineken", price: "R$ 7,00" },
+        { name: "Energético (Monster / Red Bull)", price: "R$ 15,00" },
+      ],
+    },
+  };
 
   return (
     <section
@@ -764,25 +707,120 @@ function CardapioSection() {
               marginBottom: "1.25rem",
             }}
           >
-            Cardápio
+            Cardápio Completo
           </h2>
           <div className="gold-divider">
             <span style={{ color: "#D4AF37", fontSize: "0.8rem" }}>◆</span>
           </div>
         </div>
 
-        {/* Cards grid */}
-        <div
+        {/* Tabs */}
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "2rem",
+            background: "rgba(46, 20, 20, 0.4)",
+            borderRadius: "1.5rem",
+            padding: "2rem",
+            border: "1px solid rgba(212, 175, 55, 0.15)",
           }}
         >
-          {menuItems.map((item, i) => (
-            <MenuCard key={i} {...item} delay={i * 100} />
+          <TabsList
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "0.5rem",
+              marginBottom: "2rem",
+              background: "transparent",
+              border: "none",
+              flexWrap: "wrap",
+            }}
+          >
+            {[
+              { value: "salgados", label: "Salgados" },
+              { value: "doces", label: "Doces" },
+              { value: "combos", label: "Combos" },
+              { value: "cafeteria", label: "Cafeteria" },
+              { value: "bebidas", label: "Bebidas" },
+            ].map(({ value, label }) => (
+              <TabsTrigger
+                key={value}
+                value={value}
+                style={{
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: "0.8rem",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                  padding: "0.5rem 1.25rem",
+                  borderRadius: "9999px",
+                  border: "1px solid rgba(212, 175, 55, 0.2)",
+                  background: "transparent",
+                  color: "rgba(245, 236, 215, 0.6)",
+                  cursor: "pointer",
+                  transition: "all 200ms ease",
+                }}
+                onMouseEnter={(e) => {
+                  if (activeTab !== value) {
+                    (e.target as HTMLElement).style.borderColor =
+                      "rgba(212, 175, 55, 0.4)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (activeTab !== value) {
+                    (e.target as HTMLElement).style.borderColor =
+                      "rgba(212, 175, 55, 0.2)";
+                  }
+                }}
+              >
+                {label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
+          {/* Tab Contents */}
+          {Object.entries(cardapioData).map(([key, data]) => (
+            <TabsContent key={key} value={key}>
+              <div>
+                <h3
+                  style={{
+                    fontFamily: "'Playfair Display', serif",
+                    fontSize: "1.5rem",
+                    fontWeight: 700,
+                    color: "#F5ECD7",
+                    marginBottom: "0.25rem",
+                  }}
+                >
+                  {data.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "'Montserrat', sans-serif",
+                    fontSize: "0.85rem",
+                    color: "#B87333",
+                    fontStyle: "italic",
+                    marginBottom: "1.5rem",
+                  }}
+                >
+                  {data.subtitle}
+                </p>
+
+                <div>
+                  {data.items.map((item, i) => (
+                    <MenuItem
+                      key={i}
+                      name={item.name}
+                      price={item.price}
+                      description={
+                        "description" in item ? item.description : undefined
+                      }
+                    />
+                  ))}
+                </div>
+              </div>
+            </TabsContent>
           ))}
-        </div>
+        </Tabs>
 
         {/* CTA */}
         <div
@@ -800,7 +838,7 @@ function CardapioSection() {
               marginBottom: "1.25rem",
             }}
           >
-            Quer ver o cardápio completo ou tem alguma dúvida?
+            Gostou? Peça agora pelo WhatsApp!
           </p>
           <a
             href={WA_GERAL}
@@ -811,30 +849,32 @@ function CardapioSection() {
               display: "inline-flex",
               alignItems: "center",
               gap: "0.5rem",
-              background: "transparent",
-              color: "#D4AF37",
+              background: "#25D366",
+              color: "#fff",
               padding: "0.75rem 2rem",
               borderRadius: "9999px",
-              border: "1px solid rgba(212, 175, 55, 0.4)",
               fontFamily: "'Montserrat', sans-serif",
               fontSize: "0.85rem",
               fontWeight: 600,
               textDecoration: "none",
               transition: "all 200ms ease",
+              boxShadow: "0 4px 15px rgba(37, 211, 102, 0.3)",
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = "rgba(212, 175, 55, 0.1)";
-              el.style.borderColor = "#D4AF37";
+              el.style.background = "#1da851";
+              el.style.transform = "translateY(-2px)";
+              el.style.boxShadow = "0 8px 25px rgba(37, 211, 102, 0.4)";
             }}
             onMouseLeave={(e) => {
               const el = e.currentTarget as HTMLElement;
-              el.style.background = "transparent";
-              el.style.borderColor = "rgba(212, 175, 55, 0.4)";
+              el.style.background = "#25D366";
+              el.style.transform = "translateY(0)";
+              el.style.boxShadow = "0 4px 15px rgba(37, 211, 102, 0.3)";
             }}
           >
             <WhatsAppIcon size={16} />
-            Ver Cardápio Completo
+            Fazer Pedido
           </a>
         </div>
       </div>
@@ -1023,7 +1063,14 @@ function ContatoSection() {
       />
 
       <div className="container" style={{ position: "relative" }}>
-        <div className="reveal" style={{ textAlign: "center", maxWidth: "600px", margin: "0 auto" }}>
+        <div
+          className="reveal"
+          style={{
+            textAlign: "center",
+            maxWidth: "600px",
+            margin: "0 auto",
+          }}
+        >
           <p
             style={{
               fontFamily: "'Montserrat', sans-serif",
