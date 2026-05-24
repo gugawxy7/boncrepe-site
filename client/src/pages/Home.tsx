@@ -1042,6 +1042,96 @@ function Footer() {
           <span style={{ color: "#BE5A83" }}>BON</span>
           <span style={{ color: "#B87333" }}>CREPE</span>
         </a>
+
+        {/* Social Links */}
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+            justifyContent: "center",
+            marginBottom: "0.5rem",
+          }}
+        >
+          <a
+            href="https://www.instagram.com/boncrepecreperrie/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              background: "rgba(212, 175, 55, 0.15)",
+              border: "1px solid rgba(212, 175, 55, 0.3)",
+              color: "#D4AF37",
+              textDecoration: "none",
+              transition: "all 200ms ease",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "#D4AF37";
+              el.style.color = "#1E0B0B";
+              el.style.borderColor = "#D4AF37";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "rgba(212, 175, 55, 0.15)";
+              el.style.color = "#D4AF37";
+              el.style.borderColor = "rgba(212, 175, 55, 0.3)";
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37" />
+              <circle cx="17.5" cy="6.5" r="1.5" />
+            </svg>
+          </a>
+          <a
+            href={WA_GERAL}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              background: "rgba(37, 211, 102, 0.15)",
+              border: "1px solid rgba(37, 211, 102, 0.3)",
+              color: "#25D366",
+              textDecoration: "none",
+              transition: "all 200ms ease",
+            }}
+            onMouseEnter={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "#25D366";
+              el.style.color = "#fff";
+              el.style.borderColor = "#25D366";
+            }}
+            onMouseLeave={(e) => {
+              const el = e.currentTarget as HTMLElement;
+              el.style.background = "rgba(37, 211, 102, 0.15)";
+              el.style.color = "#25D366";
+              el.style.borderColor = "rgba(37, 211, 102, 0.3)";
+            }}
+          >
+            <WhatsAppIcon size={20} />
+          </a>
+        </div>
+
         <p
           style={{
             fontFamily: "'Montserrat', sans-serif",
