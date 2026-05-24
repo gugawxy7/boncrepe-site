@@ -1,9 +1,10 @@
 /**
  * BONCREPE — Home Page
- * Design: Velvet Bistro — fundo escuro profundo, detalhes dourados/rosa/cobre
- * Tipografia: Playfair Display (títulos) + Montserrat (corpo)
- * Paleta: #1E0B0B bg | #D4AF37 gold | #BE5A83 rose | #B87333 copper | #F5ECD7 cream
- * Cardápio real com categorias: Salgados, Doces, Combos, Salgados e Cafeteria, Bebidas
+ * Design: Vintage Bistro Clássico — fundo com padrão ornamental, tipografia elegante
+ * Referência: Imagem enviada pelo cliente (estilo clássico francês)
+ * Paleta: Tons quentes, dourado, rosa, cobre
+ * Cardápio: 5 categorias em abas
+ * Contato: WhatsApp + Horário + Endereço (sem email, sem reserva)
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -18,12 +19,10 @@ const SALGADA_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663691821799/NFmTH4vDGkFDnii24wKPcg/boncrepe-salgada-4XbxkXrG6EjDRFCHK6uWei.webp";
 const CHOCO_IMG =
   "https://d2xsxph8kpxj0f.cloudfront.net/310519663691821799/NFmTH4vDGkFDnii24wKPcg/boncrepe-chocolate-quente-nLNRsYqhkbFN5uZw26edY8.webp";
-const AMBIENTE_IMG =
-  "https://d2xsxph8kpxj0f.cloudfront.net/310519663691821799/NFmTH4vDGkFDnii24wKPcg/boncrepe-ambiente-BwoeJjwm4k7n9GQgtkdx6d.webp";
 
 // ─── WhatsApp link ──────────────────────────────────────────────────────────
 const WA_BASE = "https://wa.me/5511922053411";
-const WA_GERAL = `${WA_BASE}?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es`;
+const WA_GERAL = `${WA_BASE}?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido`;
 
 // ─── WhatsApp SVG Icon ──────────────────────────────────────────────────────
 function WhatsAppIcon({ size = 18 }: { size?: number }) {
@@ -203,7 +202,6 @@ function Header() {
           {[
             { href: "#inicio", label: "Início" },
             { href: "#cardapio", label: "Cardápio" },
-            { href: "#sobre", label: "Sobre" },
             { href: "#contato", label: "Contato" },
           ].map(({ href, label }) => (
             <a
@@ -238,7 +236,7 @@ function Header() {
             display: "flex",
             alignItems: "center",
             gap: "0.5rem",
-            background: "#BE5A83",
+            background: "#25D366",
             color: "#fff",
             padding: "0.5rem 1.25rem",
             borderRadius: "9999px",
@@ -248,23 +246,23 @@ function Header() {
             textDecoration: "none",
             transition:
               "background 200ms ease, transform 200ms cubic-bezier(0.23,1,0.32,1), box-shadow 200ms ease",
-            boxShadow: "0 4px 15px rgba(190, 90, 131, 0.35)",
+            boxShadow: "0 4px 15px rgba(37, 211, 102, 0.35)",
           }}
           onMouseEnter={(e) => {
             const el = e.currentTarget as HTMLElement;
-            el.style.background = "#a8476f";
+            el.style.background = "#1da851";
             el.style.transform = "translateY(-2px)";
-            el.style.boxShadow = "0 8px 25px rgba(190, 90, 131, 0.45)";
+            el.style.boxShadow = "0 8px 25px rgba(37, 211, 102, 0.45)";
           }}
           onMouseLeave={(e) => {
             const el = e.currentTarget as HTMLElement;
-            el.style.background = "#BE5A83";
+            el.style.background = "#25D366";
             el.style.transform = "translateY(0)";
-            el.style.boxShadow = "0 4px 15px rgba(190, 90, 131, 0.35)";
+            el.style.boxShadow = "0 4px 15px rgba(37, 211, 102, 0.35)";
           }}
         >
           <WhatsAppIcon size={16} />
-          Fale Conosco
+          WhatsApp
         </a>
       </div>
     </header>
@@ -334,20 +332,6 @@ function HeroSection() {
           }
         `}</style>
 
-        <p
-          style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontSize: "0.75rem",
-            fontWeight: 600,
-            textTransform: "uppercase",
-            letterSpacing: "0.35em",
-            color: "#BE5A83",
-            marginBottom: "1.25rem",
-          }}
-        >
-          Bem-vindo ao Boncrepe
-        </p>
-
         <h1
           style={{
             fontFamily: "'Playfair Display', serif",
@@ -358,7 +342,7 @@ function HeroSection() {
             marginBottom: "1.5rem",
           }}
         >
-          A Doçura{" "}
+          Bon{" "}
           <span
             style={{
               background:
@@ -368,7 +352,7 @@ function HeroSection() {
               backgroundClip: "text",
             }}
           >
-            Perfeita
+            Crêpe
           </span>
         </h1>
 
@@ -379,12 +363,25 @@ function HeroSection() {
             fontSize: "clamp(1rem, 2vw, 1.2rem)",
             color: "rgba(245, 236, 215, 0.8)",
             maxWidth: "580px",
+            margin: "0 auto 1.5rem",
+            lineHeight: 1.8,
+          }}
+        >
+          A tradição francesa no jeito <strong>brasileiro de ser</strong>
+        </p>
+
+        <p
+          style={{
+            fontFamily: "'Montserrat', sans-serif",
+            fontWeight: 300,
+            fontSize: "clamp(0.9rem, 1.5vw, 1.1rem)",
+            color: "rgba(245, 236, 215, 0.7)",
+            maxWidth: "580px",
             margin: "0 auto 2.5rem",
             lineHeight: 1.8,
           }}
         >
-          Crepes artesanais com ingredientes frescos selecionados. Uma
-          combinação única de sabor, aconchego e arte gastronômica.
+          Sabores irresistíveis, aconchego de verdade.
         </p>
 
         <div
@@ -457,7 +454,7 @@ function HeroSection() {
               el.style.transform = "translateY(0)";
             }}
           >
-            Mais Informações
+            Explorar
           </a>
         </div>
       </div>
@@ -685,19 +682,6 @@ function CardapioSection() {
           className="reveal"
           style={{ textAlign: "center", marginBottom: "4rem" }}
         >
-          <p
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: "0.7rem",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.3em",
-              color: "#B87333",
-              marginBottom: "0.75rem",
-            }}
-          >
-            Nossas Especialidades
-          </p>
           <h2
             style={{
               fontFamily: "'Playfair Display', serif",
@@ -830,16 +814,6 @@ function CardapioSection() {
             marginTop: "3.5rem",
           }}
         >
-          <p
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: "0.9rem",
-              color: "rgba(245, 236, 215, 0.55)",
-              marginBottom: "1.25rem",
-            }}
-          >
-            Gostou? Peça agora pelo WhatsApp!
-          </p>
           <a
             href={WA_GERAL}
             target="_blank"
@@ -882,162 +856,6 @@ function CardapioSection() {
   );
 }
 
-// ─── Sobre Section ───────────────────────────────────────────────────────────
-function SobreSection() {
-  return (
-    <section
-      id="sobre"
-      style={{
-        padding: "6rem 0",
-        background: "#2E1414",
-        borderTop: "1px solid rgba(212, 175, 55, 0.1)",
-      }}
-    >
-      <div className="container">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "4rem",
-            alignItems: "center",
-          }}
-        >
-          {/* Image */}
-          <div className="reveal" style={{ position: "relative" }}>
-            <img
-              src={AMBIENTE_IMG}
-              alt="Ambiente Boncrepe"
-              style={{
-                width: "100%",
-                borderRadius: "1.5rem",
-                boxShadow:
-                  "0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.1)",
-              }}
-            />
-            {/* Decorative corner */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "-1rem",
-                right: "-1rem",
-                width: "80px",
-                height: "80px",
-                border: "2px solid rgba(212, 175, 55, 0.3)",
-                borderRadius: "0.5rem",
-                zIndex: -1,
-              }}
-            />
-          </div>
-
-          {/* Text */}
-          <div className="reveal" style={{ transitionDelay: "150ms" }}>
-            <p
-              style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontSize: "0.7rem",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.3em",
-                color: "#B87333",
-                marginBottom: "0.75rem",
-              }}
-            >
-              Nossa História
-            </p>
-            <h2
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-                fontWeight: 700,
-                color: "#F5ECD7",
-                marginBottom: "1.5rem",
-                lineHeight: 1.2,
-              }}
-            >
-              Nos conheça melhor
-            </h2>
-
-            <div
-              style={{
-                width: "48px",
-                height: "2px",
-                background: "linear-gradient(90deg, #D4AF37, transparent)",
-                marginBottom: "1.5rem",
-              }}
-            />
-
-            <p
-              style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 300,
-                fontSize: "1rem",
-                color: "rgba(245, 236, 215, 0.75)",
-                lineHeight: 1.9,
-                marginBottom: "1.25rem",
-              }}
-            >
-              O{" "}
-              <strong style={{ color: "#BE5A83", fontWeight: 600 }}>
-                Boncrepe
-              </strong>{" "}
-              nasceu com a missão de trazer a autêntica experiência das crepes
-              parisienses para o Brasil. Nossas massas são preparadas
-              manualmente todos os dias, garantindo aquele sabor artesanal que
-              você sente no primeiro bite.
-            </p>
-            <p
-              style={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 300,
-                fontSize: "1rem",
-                color: "rgba(245, 236, 215, 0.75)",
-                lineHeight: 1.9,
-                marginBottom: "2rem",
-              }}
-            >
-              Aqui, cada cliente é tratado como parte da família. Venha sentir
-              o aconchego de um lugar feito com amor e dedicação.
-            </p>
-
-            <a
-              href={WA_GERAL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-press"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                color: "#D4AF37",
-                fontFamily: "'Montserrat', sans-serif",
-                fontSize: "0.85rem",
-                fontWeight: 600,
-                textDecoration: "none",
-                borderBottom: "1px solid rgba(212, 175, 55, 0.4)",
-                paddingBottom: "2px",
-                transition: "color 200ms ease, border-color 200ms ease",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.color = "#B87333";
-                el.style.borderColor = "#B87333";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLElement;
-                el.style.color = "#D4AF37";
-                el.style.borderColor = "rgba(212, 175, 55, 0.4)";
-              }}
-            >
-              <WhatsAppIcon size={16} />
-              Fale com a gente no WhatsApp
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // ─── Contato Section ─────────────────────────────────────────────────────────
 function ContatoSection() {
   return (
@@ -1071,19 +889,6 @@ function ContatoSection() {
             margin: "0 auto",
           }}
         >
-          <p
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: "0.7rem",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.3em",
-              color: "#B87333",
-              marginBottom: "0.75rem",
-            }}
-          >
-            Fale Conosco
-          </p>
           <h2
             style={{
               fontFamily: "'Playfair Display', serif",
@@ -1098,34 +903,28 @@ function ContatoSection() {
           <div className="gold-divider" style={{ marginBottom: "2rem" }}>
             <span style={{ color: "#D4AF37", fontSize: "0.8rem" }}>◆</span>
           </div>
-          <p
-            style={{
-              fontFamily: "'Montserrat', sans-serif",
-              fontWeight: 300,
-              fontSize: "1rem",
-              color: "rgba(245, 236, 215, 0.65)",
-              lineHeight: 1.8,
-              marginBottom: "2.5rem",
-            }}
-          >
-            Tire suas dúvidas, consulte disponibilidade ou saiba mais sobre
-            nossos produtos. Estamos sempre prontos para atender você com
-            carinho.
-          </p>
 
           {/* Contact cards */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-              gap: "1rem",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "1.5rem",
               marginBottom: "2.5rem",
             }}
           >
             {[
               { icon: "📱", label: "WhatsApp", value: "(11) 92205-3411" },
-              { icon: "📍", label: "Localização", value: "São Paulo, SP" },
-              { icon: "🕐", label: "Horário", value: "Seg–Dom: 10h–22h" },
+              {
+                icon: "🕐",
+                label: "Horário",
+                value: "Ter–Dom: 11h às 20h\nFechado segunda",
+              },
+              {
+                icon: "📍",
+                label: "Endereço",
+                value: "Av João Paulo II, 1517\nCasa Branca",
+              },
             ].map((item, i) => (
               <div
                 key={i}
@@ -1147,7 +946,7 @@ function ContatoSection() {
                     textTransform: "uppercase",
                     letterSpacing: "0.15em",
                     color: "#B87333",
-                    marginBottom: "0.25rem",
+                    marginBottom: "0.5rem",
                   }}
                 >
                   {item.label}
@@ -1157,6 +956,8 @@ function ContatoSection() {
                     fontFamily: "'Montserrat', sans-serif",
                     fontSize: "0.85rem",
                     color: "rgba(245, 236, 215, 0.8)",
+                    lineHeight: 1.6,
+                    whiteSpace: "pre-line",
                   }}
                 >
                   {item.value}
@@ -1282,7 +1083,6 @@ export default function Home() {
       <HeroSection />
       <DiferenciaisSection />
       <CardapioSection />
-      <SobreSection />
       <ContatoSection />
       <Footer />
     </div>
