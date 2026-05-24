@@ -113,9 +113,9 @@ function useScrollReveal() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.1, rootMargin: "0px 0px -60px 0px" }
     );
-    const elements = document.querySelectorAll(".reveal");
+    const elements = document.querySelectorAll(".reveal, .fade-in, .slide-in-left, .slide-in-right, .stagger-item");
     elements.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
@@ -884,9 +884,9 @@ function CardapioSection() {
                   {data.items.map((item, i) => (
                     <div
                       key={i}
-                      className="stagger-item"
+                      className="reveal stagger-item"
                       style={{
-                        animation: `fadeInUp 500ms cubic-bezier(0.23, 1, 0.32, 1) ${i * 80}ms forwards`,
+                        transitionDelay: `${i * 80}ms`,
                       }}
                     >
                       <MenuItem
