@@ -124,6 +124,7 @@ function useScrollReveal() {
 // ─── Header ─────────────────────────────────────────────────────────────────
 function Header() {
   const headerRef = useRef<HTMLElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -265,7 +266,91 @@ function Header() {
           <WhatsAppIcon size={16} />
           WhatsApp
         </a>
+
+        {/* Mobile menu button */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          style={{
+            display: "none",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            color: "#D4AF37",
+            fontSize: "1.5rem",
+          }}
+          className="md:hidden"
+        >
+          {mobileMenuOpen ? "✕" : "☰"}
+        </button>
       </div>
+
+      {/* Mobile menu */}
+      {mobileMenuOpen && (
+        <div
+          style={{
+            display: "block",
+            background: "rgba(30, 11, 11, 0.98)",
+            backdropFilter: "blur(12px)",
+            padding: "1.5rem 1rem",
+            borderTop: "1px solid rgba(212, 175, 55, 0.1)",
+            animation: "slideInDown 300ms cubic-bezier(0.23, 1, 0.32, 1)",
+          }}
+          className="md:hidden"
+        >
+          <style>{`
+            @keyframes slideInDown {
+              from {
+                opacity: 0;
+                transform: translateY(-20px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+          `}</style>
+          <nav
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: "0.85rem",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+            }}
+          >
+            {[
+              { href: "#inicio", label: "Início" },
+              { href: "#cardapio", label: "Cardápio" },
+              { href: "#historia", label: "Nossa História" },
+              { href: "#contato", label: "Contato" },
+            ].map(({ href, label }) => (
+              <a
+                key={href}
+                href={href}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  color: "rgba(245, 236, 215, 0.8)",
+                  textDecoration: "none",
+                  transition: "color 200ms ease",
+                  padding: "0.5rem 0",
+                }}
+                onMouseEnter={(e) =>
+                  ((e.target as HTMLElement).style.color = "#D4AF37")
+                }
+                onMouseLeave={(e) =>
+                  ((e.target as HTMLElement).style.color =
+                    "rgba(245, 236, 215, 0.8)")
+                }
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
@@ -539,7 +624,7 @@ function DiferenciaisSection() {
           {items.map((item, i) => (
             <div
               key={i}
-              className="reveal"
+              className="reveal stagger-item"
               style={{
                 transitionDelay: `${i * 80}ms`,
                 padding: "2rem 1.5rem",
@@ -790,16 +875,28 @@ function CardapioSection() {
                   {data.subtitle}
                 </p>
 
-                <div>
+                <div
+                  style={{
+                    display: "grid",
+                    gap: "1rem",
+                  }}
+                >
                   {data.items.map((item, i) => (
-                    <MenuItem
+                    <div
                       key={i}
-                      name={item.name}
-                      price={item.price}
-                      description={
-                        "description" in item ? item.description : undefined
-                      }
-                    />
+                      className="stagger-item"
+                      style={{
+                        animation: `fadeInUp 500ms cubic-bezier(0.23, 1, 0.32, 1) ${i * 80}ms forwards`,
+                      }}
+                    >
+                      <MenuItem
+                        name={item.name}
+                        price={item.price}
+                        description={
+                          "description" in item ? item.description : undefined
+                        }
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
