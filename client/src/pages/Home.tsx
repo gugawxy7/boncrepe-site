@@ -58,6 +58,7 @@ function MenuItem({
         justifyContent: "space-between",
         alignItems: "flex-start",
         gap: "1rem",
+        flexWrap: "wrap",
       }}
       className="reveal"
     >
@@ -65,10 +66,11 @@ function MenuItem({
         <p
           style={{
             fontFamily: "'Montserrat', sans-serif",
-            fontSize: "0.95rem",
+            fontSize: "clamp(0.85rem, 2vw, 0.95rem)",
             fontWeight: 600,
             color: "#F5ECD7",
             marginBottom: description ? "0.25rem" : 0,
+            wordBreak: "break-word",
           }}
         >
           {name}
@@ -90,10 +92,11 @@ function MenuItem({
         style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontStyle: "italic",
-          fontSize: "1.1rem",
+          fontSize: "clamp(0.95rem, 2vw, 1.1rem)",
           fontWeight: 600,
           color: "#D4AF37",
           whiteSpace: "nowrap",
+          flexShrink: 0,
         }}
       >
         {price}
@@ -818,11 +821,11 @@ function CardapioSection() {
                 value={value}
                 style={{
                   fontFamily: "'Montserrat', sans-serif",
-                  fontSize: "0.8rem",
+                  fontSize: "clamp(0.65rem, 1.5vw, 0.8rem)",
                   fontWeight: 600,
                   textTransform: "uppercase",
                   letterSpacing: "0.1em",
-                  padding: "0.5rem 1.25rem",
+                  padding: "clamp(0.4rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1.25rem)",
                   borderRadius: "9999px",
                   border: "1px solid rgba(212, 175, 55, 0.2)",
                   background: "transparent",
