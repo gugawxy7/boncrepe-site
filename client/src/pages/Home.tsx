@@ -1020,10 +1020,33 @@ function NossaHistoriaSection() {
                 marginBottom: "1.25rem",
               }}
             >
-              Nascida do amor pela culinária francesa, a Bon Crêpe traz para o
-              Brasil a autenticidade das crêperies parisienses com o calor e a
-              criatividade tipicamente brasileira. Cada crepe é uma obra de arte
-              comestível.
+              A Bon Crepe nasceu da união de dois caminhos traçados com muito suor, dedicação e um sonho em comum. Durante mais de uma década, nossa rotina foi o universo dos buffets. Começamos do início, como monitor de brinquedos, passei a atuar como garçom e, há vários anos, encontrei minha verdadeira paixão na chapa, dominando a arte do autêntico crepe francês. Nossa mãe, que carrega uma bagagem ainda maior nesse ramo, sempre guardou no coração o desejo de empreender e ter o seu próprio negócio. Foi desse encontro de experiências e do amor pela gastronomia que decidimos unir forças.
+            </p>
+
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 300,
+                fontSize: "1rem",
+                color: "rgba(245, 236, 215, 0.75)",
+                lineHeight: 1.9,
+                marginBottom: "1.25rem",
+              }}
+            >
+              <strong style={{ color: "#D4AF37" }}>Nosso propósito sempre foi muito claro: entregar o luxo acessível.</strong> Sempre nos questionamos por que o acesso a um ambiente bonito, com técnicas gastronômicas refinadas e um chef de dólma precisava ser um privilégio de poucos, longe da realidade de quem vive na comunidade. Nós nascemos com a missão de corrigir isso.
+            </p>
+
+            <p
+              style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontWeight: 300,
+                fontSize: "1rem",
+                color: "rgba(245, 236, 215, 0.75)",
+                lineHeight: 1.9,
+                marginBottom: "1.25rem",
+              }}
+            >
+              A Bon Crepe é a prova de que a alta qualidade cabe no bolso de todos. Nosso compromisso vai muito além do sabor: está na higiene impecável, no cuidado com cada detalhe, na apresentação profissional com vestimentas adequadas e no preparo técnico correto — tudo isso praticando sempre um preço justo.
             </p>
 
             <p
@@ -1035,9 +1058,7 @@ function NossaHistoriaSection() {
                 lineHeight: 1.9,
               }}
             >
-              Usamos apenas ingredientes frescos e selecionados, preparados na
-              hora com muito carinho. Porque acreditamos que comida boa é aquela
-              feita com alma.
+              Mais do que vender crepes, nós entregamos respeito, dignidade e uma experiência gastronômica completa para a nossa gente. <strong style={{ color: "#D4AF37" }}>Bem-vindos à Bon Crepe!</strong>
             </p>
           </div>
         </div>
